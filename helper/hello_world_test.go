@@ -3,6 +3,9 @@ package helper
 import (
 	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // Unit test for HelloWorld function
@@ -18,6 +21,28 @@ import (
 // use t.FailNow() -> mark test as failed and stop running rest code in the same test function
 // use t.Errorf("format", args...) -> mark test as failed with formatted error message but continue call t.Fail() running rest code in the same test function
 // use t.Fatalf("format", args...) -> mark test as failed with formatted error message and call t.FailNow() stop running rest code in the same test function
+// THE COMMMON PRACTICE IS TO USE PACKAGE "TESTIFY/ASSERT" FOR TESTING
+
+// TestHelloWorldAssert uses testify/require package for testing
+// if failed, will call t.FailNow()
+// not return boolean value
+func TestHelloWorldRequire(t *testing.T) {
+	result := HelloWorld("Dipa")
+
+	require.Equal(t, "Hello Dipa!", result, "they should be equal")
+	fmt.Println("TestHelloWorldRequire done")
+}
+
+// TestHelloWorldAssert uses testify/assert package for testing
+// if failed, will call t.Fail()
+// return boolean value
+func TestHelloWorldAssert(t *testing.T) {
+	result := HelloWorld("Dipa")
+
+	ar := assert.Equal(t, "Hello Dipa!", result, "they should be equal")
+	fmt.Println("Assertion result:", ar)
+	fmt.Println("TestHelloWorldAssert done")
+}
 
 func TestHelloWorldUser(t *testing.T) {
 	result := HelloWorld("Dipa")
