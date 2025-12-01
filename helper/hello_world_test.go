@@ -2,6 +2,7 @@ package helper
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -83,4 +84,13 @@ func TestHelloWorldAdmin(t *testing.T) {
 	}
 	// this line will not be executed if the test fails above
 	fmt.Println("TestHelloWorldAdmin done")
+}
+
+func TestSkip(t *testing.T) {
+	if runtime.GOOS == "darwin" {
+		t.Skip("Can not run on Mac OS")
+	}
+
+	result := HelloWorld("Admin")
+	assert.Equal(t, "Hello Admin!", result, "they should be equal")
 }

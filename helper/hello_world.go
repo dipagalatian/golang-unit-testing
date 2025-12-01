@@ -1,6 +1,7 @@
 package helper
 
 func HelloWorld(name string) string {
-	// return "Hi " + name + "!"  -> to make the test fail
-	return "Hello " + name + "!"
+	// -> to make the test fail
+	return "Hi " + name + "!" 
+	// return "Hello " + name + "!"
 }
