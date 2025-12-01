@@ -24,6 +24,18 @@ import (
 // use t.Fatalf("format", args...) -> mark test as failed with formatted error message and call t.FailNow() stop running rest code in the same test function
 // THE COMMMON PRACTICE IS TO USE PACKAGE "TESTIFY/ASSERT" FOR TESTING
 
+// TestMain function will execute before and after all testing
+// can be used for running logic before & after the testing start
+func TestMain(m * testing.M) {
+	// before
+	fmt.Println("BEFORE UNIT TEST")
+	
+	m.Run() // execute all testing
+
+	// after
+	fmt.Println("AFTER UNIT TEST")
+}
+
 // TestHelloWorldAssert uses testify/require package for testing
 // if failed, will call t.FailNow()
 // not return boolean value
@@ -86,6 +98,7 @@ func TestHelloWorldAdmin(t *testing.T) {
 	fmt.Println("TestHelloWorldAdmin done")
 }
 
+// To skip specific unit test, we can call t.Skip()
 func TestSkip(t *testing.T) {
 	if runtime.GOOS == "darwin" {
 		t.Skip("Can not run on Mac OS")
