@@ -24,6 +24,22 @@ import (
 // use t.Fatalf("format", args...) -> mark test as failed with formatted error message and call t.FailNow() stop running rest code in the same test function
 // THE COMMMON PRACTICE IS TO USE PACKAGE "TESTIFY/ASSERT" FOR TESTING
 
+// Sub Test
+// use t.Run("name", func(t *testing.T) {}) for running sub test
+// use t.Run("name", func(t *testing.T) {}) for running sub test
+func TestSubTest(t *testing.T) {
+	t.Run("Dipa", func(t *testing.T) {
+		result := HelloWorld("Dipa")
+		require.Equal(t, "Hello Dipa!", result, "they should be equal")
+	})
+
+	t.Run("Admin", func(t *testing.T) {
+		result := HelloWorld("Admin")
+		require.Equal(t, "Hello Admin!", result, "they should be equal")
+	})
+}
+
+
 // TestMain function will execute before and after all testing
 // can be used for running logic before & after the testing start
 func TestMain(m * testing.M) {
