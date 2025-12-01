@@ -24,6 +24,44 @@ import (
 // use t.Fatalf("format", args...) -> mark test as failed with formatted error message and call t.FailNow() stop running rest code in the same test function
 // THE COMMMON PRACTICE IS TO USE PACKAGE "TESTIFY/ASSERT" FOR TESTING
 
+// Table Test
+// To avoid diplicate the boilerplate code, we can use Sub Test + interation
+// Provide the slice data with the name, request data, expected data
+func TestTableHelloWorld(t * testing.T) {
+
+	// Multiple data to test
+	tests := []struct {
+		name string
+		request string
+		expected string
+	} {
+		{
+			name: "Dipa",
+			request: "Dipa",
+			expected: "Hello Dipa!",
+		},
+		{
+			name: "Admin",
+			request: "Admin",
+			expected: "Hello Admin!",
+		},
+		{
+			name: "Root",
+			request: "Root",
+			expected: "Hello Root!",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := HelloWorld(test.request)
+			require.Equal(t, test.expected, result, "they should be equal")
+		})
+	}
+
+}
+
+
 // Sub Test
 // use t.Run("name", func(t *testing.T) {}) for running sub test
 // use t.Run("name", func(t *testing.T) {}) for running sub test
