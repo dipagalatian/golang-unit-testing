@@ -161,3 +161,70 @@ func TestSkip(t *testing.T) {
 	result := HelloWorld("Admin")
 	assert.Equal(t, "Hello Admin!", result, "they should be equal")
 }
+
+// BECNHMARK TESTING
+// To run benchmark test, use command: go test -bench=.
+// Naming convention: function name must start with "Benchmark"
+// use *testing.B struct for benchmark testing
+// use b.N for loop iteration based on benchmark calculation
+// benchmark test will run multiple iteration to get the best result
+// benchmark is used to measure performance of specific code
+// running bench mark with unit test: go test -v -bench=.
+// running specific benchmark test: go test -v -bench=BenchmarkHelloWo
+
+func BenchmarkTable(b * testing.B) {
+	benchmarks := []struct {
+		name, request string
+	} {
+		{
+			name: "Dipa",
+			request: "Dipa",
+		},
+		{
+			name: "Admin",
+			request: "Admin",
+		},
+		{
+			name: "Root",
+			request: "Root",
+		},
+		{
+			name: "superadmin",
+			request: "Parar Tria Dipa Galatian",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWorld(benchmark.request)
+			}
+		})
+	}
+	
+}
+
+func BenchmarkSub(b *testing.B) {
+	b.Run("dipa", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+		HelloWorld("dipa")
+	}
+	})
+
+	b.Run("galatian", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+		HelloWorld("galatian")
+	}
+	})
+}
+
+func BenchmarkHelloWorld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("Dipa")
+	}
+}
+func BenchmarkHelloWorldAdmin(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("Admin")
+	}
+}
